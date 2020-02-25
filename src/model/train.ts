@@ -35,6 +35,8 @@ export class Train {
     };
     public positionDirty: boolean = false;
 
+    public hitSensors: Sensor[] = [];
+
     public constructor(id: number) {
         this.id = id;
     }
@@ -111,6 +113,7 @@ export class Train {
             }
             this.positionDirty = true;
         }
+        this.hitSensors = this.hitSensors.concat(this.frontWheel.track.getSensorsAt(this.frontWheel.distance, this.frontWheel.forward));
     }
 
     public reverse() {
@@ -139,7 +142,9 @@ export class Train {
     }
 
     public getTriggeredSensors(): Sensor[] {
-        return this.frontWheel.track.getSensorsAt(this.frontWheel.distance, this.frontWheel.forward);
+        const s = this.hitSensors;
+        this.hitSensors = [];
+        return s;
     }
 }
 
