@@ -28,6 +28,8 @@ export class MarklinDecoder {
     private decodeSingleCharCommand(controller: MarklinController, code: number): void {
         if (code < 35 && code !== 32) {
             this.codeBuffer = code;
+        } else if (code === 0x61) {
+            controller.emergencyStop();
         } else if (code === 133) {
             controller.requestSensorReporting();
         } else {

@@ -49,6 +49,12 @@ export class MarklinController {
         train.light = light;
     }
 
+    public emergencyStop() {
+        for (const train of this.trains.values()) {
+            train.currentSpeed = 0;
+        }
+    }
+
     public reverseTrain(id: number) {
         if (!this.trains.has(id)) {
             console.warn(`Setting train speed for train out of track: ${id}.`);
