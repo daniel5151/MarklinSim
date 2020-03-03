@@ -52,6 +52,7 @@ export class MarklinController {
     public emergencyStop() {
         for (const train of this.trains.values()) {
             train.currentSpeed = 0;
+            train.targetSpeed = 0;
         }
     }
 
